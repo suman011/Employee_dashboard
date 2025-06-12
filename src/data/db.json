@@ -4,7 +4,27 @@
       "username": "nitin.tulaskar@siemens.com",
       "password": "123456",
       "role": "admin"
-    },    
+    }, 
+    {
+      "username": "patelmanish@siemens.com",
+      "password": "123456",
+      "role": "admin"
+    }, 
+    {
+      "username": "amol.bhalerao@siemens.com",
+      "password": "123456",
+      "role": "admin"
+    }, 
+    {
+      "username": "ashish.gaikwad@siemens.com",
+      "password": "123456",
+      "role": "admin"
+    }, 
+    {
+      "username": "jyotirmoy.dutta@siemens.com",
+      "password": "123456",
+      "role": "admin"
+    }, 
     {
       "username": "mukesh.sonune@siemens.com",
       "password": "123456",

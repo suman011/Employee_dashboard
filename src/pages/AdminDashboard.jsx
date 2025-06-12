@@ -11,7 +11,9 @@ import {
   TableBody,
   Paper,
   TableContainer,
-  TextField
+  TextField,
+  useTheme,
+  useMediaQuery
 } from "@mui/material";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import employees from "../data/employees.json";
@@ -25,6 +27,9 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState(null);
   const [desc, setDesc] = useState(true);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const rows = useMemo(() => {
     const totalFields = Object.values(EVAL_CONFIG).reduce(
@@ -169,83 +174,80 @@ export default function AdminDashboard() {
     >
       <Grid container justifyContent="center">
         <Grid xs={12}>
-        <Paper
-  elevation={3}
-  sx={{
-    p: 2,
-    mb: 2,
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    height: "100px"
-  }}
->
-  {/* Logo - Left aligned */}
-  <Box sx={{ position: "absolute", left: 45 }}>
-    <img
-      src="/images/productivelogo.png"
-      alt="Logo"
-      style={{ width: "80px", height: "auto" }}
-    />
-  </Box>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 2,
+              mb: 2,
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              height: "100px"
+            }}
+          >
+            <Box sx={{ position: "absolute", left: 45 }}>
+              <img
+                src="/images/productivelogo.png"
+                alt="Logo"
+                style={{ width: "80px", height: "auto" }}
+              />
+            </Box>
 
-  {/* Title - Centered */}
-  <Box
-    sx={{
-      flex: 1,
-      textAlign: "center",
-      width: "100%",
-    }}
-  >
-    <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
-      Automation Champion Batch-1 Assessment
-    </h1>
-  </Box>
-</Paper>
+            <Box sx={{ flex: 1, textAlign: "center", width: "100%" }}>
+              <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
+                Automation Champion Batch-1 Assessment
+              </h1>
+            </Box>
+          </Paper>
 
+          {/* Responsive Filter Section */}
+          <Grid container spacing={2} alignItems="center" justifyContent="space-between" mb={2}>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                {FACTORIES.map((f) => (
+                  <Button
+                    key={f}
+                    variant={factoryFilter === f ? "contained" : "outlined"}
+                    onClick={() => setFactoryFilter(f)}
+                    sx={{
+                      backgroundColor: factoryFilter === f ? "#1976d2" : "#fff",
+                      color: factoryFilter === f ? "#fff" : "#1976d2",
+                      borderColor: "#1976d2",
+                      "&:hover": { backgroundColor: factoryFilter === f ? "#1565c0" : "#f0f0f0" }
+                    }}
+                  >
+                    {f}
+                  </Button>
+                ))}
+              </Box>
+            </Grid>
 
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-end", gap: 1 }}>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Search by name, factory or project"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  sx={{ minWidth: 200, backgroundColor: "#fff", borderRadius: 1 }}
+                />
 
-          <Box sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", mb: 2, gap: 1 }}>
-            <Box sx={{ display: "flex", gap: 1 }}>
-              {FACTORIES.map((f) => (
-                <Button
-                  key={f}
-                  variant={factoryFilter === f ? "contained" : "outlined"}
-                  onClick={() => setFactoryFilter(f)}
-                  sx={{
-                    backgroundColor: factoryFilter === f ? "#1976d2" : "#fff",
-                    color: factoryFilter === f ? "#fff" : "#1976d2",
-                    borderColor: "#1976d2",
-                    "&:hover": { backgroundColor: factoryFilter === f ? "#1565c0" : "#f0f0f0" }
-                  }}
-                >
-                  {f}
+                <Button variant="contained" color="primary" onClick={() => navigate("/evaluation-criteria")}>
+                  EVALUATION CRITERIA
                 </Button>
-              ))}
-            </Box>
 
-            <TextField
-              variant="outlined"
-              size="small"
-              label="Search by name, factory or project"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              sx={{ minWidth: 300, backgroundColor: "#fff", borderRadius: 1 }}
-            />
+                <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>
+                  RESET
+                </Button>
 
-            <Button variant="contained" color="primary" onClick={() => navigate("/evaluation-criteria")}>
-              EVALUATION CRITERIA
-            </Button>
+                <Button variant="contained" onClick={handleExportCSV}>
+                  EXPORT CSV
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
 
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>
-                RESET
-              </Button>
-              <Button variant="contained" onClick={handleExportCSV}>EXPORT CSV</Button>
-            </Box>
-          </Box>
-
-          {/* ✅ FINAL FIX: Wrap Table in scrollable Box with minWidth */}
           <Box sx={{ width: "100%", overflowX: "auto" }}>
             <TableContainer component={Paper} elevation={3} sx={{ minWidth: "100%" }}>
               <Table sx={{ minWidth: 1200 }}>
