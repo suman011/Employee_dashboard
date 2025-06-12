@@ -142,10 +142,16 @@ export default function AdminDashboard() {
   };
 
   const handleReset = () => {
-    setFactoryFilter("All");
-    setSearch("");
-    setSortKey(null);
-    setDesc(true);
+    if (window.confirm("Are you sure you want to reset all evaluation data?")) {
+      setFactoryFilter("All");
+      setSearch("");
+      setSortKey(null);
+      setDesc(true);
+
+      employees.forEach((emp) => {
+        localStorage.removeItem(`eval_${emp.name}`);
+      });
+    }
   };
 
   const columns = [
@@ -162,65 +168,27 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundImage: 'url("/images/background.png")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        py: 4
-      }}
-    >
+    <Box sx={{ minHeight: "100vh", backgroundImage: 'url("/images/background.png")', backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", py: 4 }}>
       <Grid container justifyContent="center">
         <Grid xs={12}>
-          {/* FINAL RESPONSIVE HEADER */}
-          <Paper
-            elevation={3}
-            sx={{
-              p: 2,
-              mb: 2,
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: "center",
-              justifyContent: { xs: "center", sm: "flex-start" },
-              gap: 2
-            }}
-          >
-            <Box>
-              <img
-                src="/images/productivelogo.png"
-                alt="Logo"
-                style={{
-                  width: "60px",
-                  height: "auto",
-                }}
-              />
-            </Box>
-
-            <Box sx={{ textAlign: { xs: "center"}, width: "100%" }}>
-              <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>
-                Automation Champion Batch-1 Assessment
-              </h1>
+          <Paper elevation={3} sx={{ p: 2, mb: 2, display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: "center", justifyContent: { xs: "center", sm: "flex-start" }, gap: 2 }}>
+            <Box><img src="/images/productivelogo.png" alt="Logo" style={{ width: "60px", height: "auto" }} /></Box>
+            <Box sx={{ textAlign: { xs: "center", sm: "center" }, width: "100%" }}>
+              <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>Automation Champion Batch-1 Assessment</h1>
             </Box>
           </Paper>
 
-          {/* Responsive Filter Section */}
           <Grid container spacing={2} alignItems="center" justifyContent="space-between" mb={2}>
             <Grid item xs={12} md={6}>
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                 {FACTORIES.map((f) => (
-                  <Button
-                    key={f}
-                    variant={factoryFilter === f ? "contained" : "outlined"}
-                    onClick={() => setFactoryFilter(f)}
+                  <Button key={f} variant={factoryFilter === f ? "contained" : "outlined"} onClick={() => setFactoryFilter(f)}
                     sx={{
                       backgroundColor: factoryFilter === f ? "#1976d2" : "#fff",
                       color: factoryFilter === f ? "#fff" : "#1976d2",
                       borderColor: "#1976d2",
                       "&:hover": { backgroundColor: factoryFilter === f ? "#1565c0" : "#f0f0f0" }
-                    }}
-                  >
+                    }}>
                     {f}
                   </Button>
                 ))}
@@ -229,26 +197,11 @@ export default function AdminDashboard() {
 
             <Grid item xs={12} md={6}>
               <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: isMobile ? "center" : "flex-end", gap: 1 }}>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  label="Search by name, factory or project"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  sx={{ minWidth: 200, backgroundColor: "#fff", borderRadius: 1 }}
-                />
-
-                <Button variant="contained" color="primary" onClick={() => navigate("/evaluation-criteria")}>
-                  EVALUATION CRITERIA
-                </Button>
-
-                <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>
-                  RESET
-                </Button>
-
-                <Button variant="contained" onClick={handleExportCSV}>
-                  EXPORT CSV
-                </Button>
+                <TextField variant="outlined" size="small" label="Search by name, factory or project" value={search} onChange={(e) => setSearch(e.target.value)}
+                  sx={{ minWidth: 200, backgroundColor: "#fff", borderRadius: 1 }} />
+                <Button variant="contained" color="primary" onClick={() => navigate("/evaluation-criteria")}>EVALUATION CRITERIA</Button>
+                <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>RESET</Button>
+                <Button variant="contained" onClick={handleExportCSV}>EXPORT CSV</Button>
               </Box>
             </Grid>
           </Grid>
@@ -260,18 +213,10 @@ export default function AdminDashboard() {
                   <TableRow>
                     {columns.map(({ key, label, sortable = true }) => (
                       <TableCell key={key} align="center" sx={{ fontWeight: "bold", fontSize: "1rem" }}>
-                        <Box
-                          sx={{
-                            cursor: sortable ? "pointer" : "default",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center"
-                          }}
-                          onClick={() => sortable && toggleSort(key)}
-                        >
+                        <Box sx={{ cursor: sortable ? "pointer" : "default", display: "flex", alignItems: "center", justifyContent: "center" }}
+                          onClick={() => sortable && toggleSort(key)}>
                           {label}
-                          {sortKey === key &&
-                            (desc ? <ArrowDownward fontSize="small" /> : <ArrowUpward fontSize="small" />)}
+                          {sortKey === key && (desc ? <ArrowDownward fontSize="small" /> : <ArrowUpward fontSize="small" />)}
                         </Box>
                       </TableCell>
                     ))}
@@ -282,16 +227,13 @@ export default function AdminDashboard() {
                   {rows.map((r) => (
                     <TableRow key={r.sr} hover>
                       <TableCell align="center">{r.sr}</TableCell>
-                      <TableCell align="center">{r.name}</TableCell>
+                      <TableCell align="left">{r.name}</TableCell>   {/* Left aligned */}
                       <TableCell align="center">{r.factory}</TableCell>
-                      <TableCell align="center">{r.project}</TableCell>
+                      <TableCell align="left">{r.project}</TableCell> {/* Left aligned */}
 
                       {sessionStorage.getItem("userRole") === "admin" && (
                         <TableCell align="center">
-                          <Button
-                            size="small"
-                            variant="contained"
-                            color="warning"
+                          <Button size="small" variant="contained" color="warning"
                             onClick={() => {
                               const formWindow = window.open(
                                 `/evaluate?name=${encodeURIComponent(r.name)}`,
@@ -304,8 +246,7 @@ export default function AdminDashboard() {
                                   window.location.reload();
                                 }
                               }, 1000);
-                            }}
-                          >
+                            }}>
                             FILL FORM
                           </Button>
                         </TableCell>
@@ -316,18 +257,14 @@ export default function AdminDashboard() {
                       </TableCell>
 
                       <TableCell align="center">
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          onClick={() => navigate(`/employee/${r.sr - 1}`)}
-                        >
-                          VIEW
-                        </Button>
+                        <Button size="small" variant="outlined" onClick={() => navigate(`/employee/${r.sr - 1}`)}>VIEW</Button>
                       </TableCell>
+
                       <TableCell align="center">{r.filling}%</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
+
               </Table>
             </TableContainer>
           </Box>
