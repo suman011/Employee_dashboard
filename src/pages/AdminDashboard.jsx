@@ -174,27 +174,32 @@ export default function AdminDashboard() {
     >
       <Grid container justifyContent="center">
         <Grid xs={12}>
+          {/* FINAL RESPONSIVE HEADER */}
           <Paper
             elevation={3}
             sx={{
               p: 2,
               mb: 2,
-              position: "relative",
               display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
               alignItems: "center",
-              height: "100px"
+              justifyContent: { xs: "center", sm: "flex-start" },
+              gap: 2
             }}
           >
-            <Box sx={{ position: "absolute", left: 45 }}>
+            <Box>
               <img
                 src="/images/productivelogo.png"
                 alt="Logo"
-                style={{ width: "80px", height: "auto" }}
+                style={{
+                  width: "60px",
+                  height: "auto"
+                }}
               />
             </Box>
 
-            <Box sx={{ flex: 1, textAlign: "center", width: "100%" }}>
-              <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
+            <Box sx={{ textAlign: { xs: "center", sm: "left" }, width: "100%" }}>
+              <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>
                 Automation Champion Batch-1 Assessment
               </h1>
             </Box>

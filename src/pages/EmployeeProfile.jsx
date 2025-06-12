@@ -1,4 +1,3 @@
-// src/pages/EmployeeProfile.jsx
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -13,6 +12,8 @@ import {
   TableRow,
   Paper,
   TableContainer,
+  useTheme,
+  useMediaQuery
 } from "@mui/material";
 import employees from "../data/employees.json";
 import { EVAL_CONFIG } from "../config/evalConfig";
@@ -21,7 +22,9 @@ export default function EmployeeProfile() {
   const { id: routeId } = useParams();
   const navigate = useNavigate();
 
-  // Support both admin (URL param) and employee (sessionStorage)
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const id = routeId ?? sessionStorage.getItem("employeeIndex");
   const idx = parseInt(id, 10);
   const e = employees[idx];
@@ -30,12 +33,7 @@ export default function EmployeeProfile() {
     return (
       <Container maxWidth="md" sx={{ py: 4 }}>
         <Typography color="error">Participant not found.</Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          sx={{ mt: 2 }}
-          onClick={() => navigate(-1)}
-        >
+        <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={() => navigate(-1)}>
           ← Back
         </Button>
       </Container>
@@ -61,9 +59,7 @@ export default function EmployeeProfile() {
       .filter((v) => v !== null);
 
     const sectionScore =
-      subScores.length > 0
-        ? subScores.reduce((sum, v) => sum + v, 0) / subScores.length
-        : 0;
+      subScores.length > 0 ? subScores.reduce((sum, v) => sum + v, 0) / subScores.length : 0;
 
     sectionScores[sectionKey] = sectionScore;
 
@@ -73,7 +69,7 @@ export default function EmployeeProfile() {
     }
   });
 
-  const allSectionScores = Object.values(sectionScores).filter(score => score > 0);
+  const allSectionScores = Object.values(sectionScores).filter((score) => score > 0);
   const overallRating =
     allSectionScores.length > 0
       ? parseFloat((allSectionScores.reduce((sum, v) => sum + v, 0) / allSectionScores.length).toFixed(1))
@@ -87,51 +83,40 @@ export default function EmployeeProfile() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        py: 4,
+        py: 4
       }}
     >
       <Container maxWidth="lg">
+        {/* Responsive Header */}
         <Paper
           elevation={3}
           sx={{
             p: 2,
             mb: 2,
-            position: "relative",
             display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
             alignItems: "center",
-            height: "100px"
+            justifyContent: { xs: "center", sm: "flex-start" },
+            gap: 2
           }}
         >
-          {/* Logo - Left aligned */}
-          <Box sx={{ position: "absolute", left: 45 }}>
-            <img
-              src="/images/productivelogo.png"
-              alt="Logo"
-              style={{ width: "80px", height: "auto" }}
-            />
+          <Box>
+            <img src="/images/productivelogo.png" alt="Logo" style={{ width: "60px", height: "auto" }} />
           </Box>
-        
-          {/* Title - Centered */}
-          <Box
-            sx={{
-              flex: 1,
-              textAlign: "center",
-              width: "100%",
-            }}
-          >
-            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
+
+          <Box sx={{ textAlign: { xs: "center", sm: "left" }, width: "100%" }}>
+            <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>
               Automation Champion Batch-1 Assessment
             </h1>
           </Box>
         </Paper>
-        
 
         <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate(-1)}>
           ← Back to Dashboard
         </Button>
 
         <TableContainer component={Paper}>
-          <Table>
+          <Table sx={{ minWidth: 800 }} stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Participant Name</TableCell>
@@ -158,7 +143,7 @@ export default function EmployeeProfile() {
                   "Particulars",
                   "Rating Range",
                   "Sub-Score",
-                  "Evaluated By",
+                  "Evaluated By"
                 ].map((h) => (
                   <TableCell key={h} align="center" sx={{ fontWeight: "bold" }}>
                     {h}
@@ -175,9 +160,13 @@ export default function EmployeeProfile() {
                     <TableRow key={it.key}>
                       {iIdx === 0 && (
                         <>
-                          <TableCell rowSpan={items.length} align="center">{sIdx + 1}</TableCell>
+                          <TableCell rowSpan={items.length} align="center">
+                            {sIdx + 1}
+                          </TableCell>
                           <TableCell rowSpan={items.length}>{title}</TableCell>
-                          <TableCell rowSpan={items.length} align="center">{weight}%</TableCell>
+                          <TableCell rowSpan={items.length} align="center">
+                            {weight}%
+                          </TableCell>
                           <TableCell rowSpan={items.length} align="center">
                             {sectionScores[sectionKey]?.toFixed(1) || "0.0"}
                           </TableCell>
@@ -186,9 +175,7 @@ export default function EmployeeProfile() {
                       <TableCell>{it.label}</TableCell>
                       <TableCell align="center">0 – {it.max}</TableCell>
                       <TableCell align="center">
-                        {subScoreVal !== "" && subScoreVal !== undefined
-                          ? Number(subScoreVal).toFixed(2)
-                          : "–"}
+                        {subScoreVal !== "" && subScoreVal !== undefined ? Number(subScoreVal).toFixed(2) : "–"}
                       </TableCell>
                       {iIdx === 0 && (
                         <TableCell rowSpan={items.length} align="center">
