@@ -104,7 +104,7 @@ export default function EmployeeProfile() {
             <img src="/images/productivelogo.png" alt="Logo" style={{ width: "60px", height: "auto" }} />
           </Box>
 
-          <Box sx={{ textAlign: { xs: "center", sm: "left" }, width: "100%" }}>
+          <Box sx={{ textAlign: { xs: "center" }, width: "100%" }}>
             <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>
               Automation Champion Batch-1 Assessment
             </h1>
