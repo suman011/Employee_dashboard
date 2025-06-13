@@ -95,7 +95,7 @@ export default function EvaluationForm() {
              }}
            >
              <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
-               Automation Champion Batch-1 Assessment
+               Automation Champion Assessment
              </h1>
            </Box>
          </Paper>

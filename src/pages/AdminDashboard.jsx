@@ -141,18 +141,18 @@ export default function AdminDashboard() {
     document.body.removeChild(link);
   };
 
-  const handleReset = () => {
-    if (window.confirm("Are you sure you want to reset all evaluation data?")) {
-      setFactoryFilter("All");
-      setSearch("");
-      setSortKey(null);
-      setDesc(true);
+  // const handleReset = () => {
+  //   if (window.confirm("Are you sure you want to reset all evaluation data?")) {
+  //     setFactoryFilter("All");
+  //     setSearch("");
+  //     setSortKey(null);
+  //     setDesc(true);
 
-      employees.forEach((emp) => {
-        localStorage.removeItem(`eval_${emp.name}`);
-      });
-    }
-  };
+  //     employees.forEach((emp) => {
+  //       localStorage.removeItem(`eval_${emp.name}`);
+  //     });
+  //   }
+  // };
 
   const columns = [
     { key: "sr", label: "Sr." },
@@ -168,19 +168,19 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <Box sx={{ minHeight: "100vh", backgroundImage: 'url("/images/background.png")', backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", py: 4 }}>
+    <Box sx={{ minHeight: "100vh", backgroundImage: 'url("/images/loginbackground.png")', backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", py: 4 }}>
       <Grid container justifyContent="center">
         <Grid xs={12}>
           <Paper elevation={3} sx={{ p: 2, mb: 2, display: "flex", flexDirection: { xs: "column", sm: "row" }, alignItems: "center", justifyContent: { xs: "center", sm: "flex-start" }, gap: 2 }}>
             <Box><img src="/images/productivelogo.png" alt="Logo" style={{ width: "60px", height: "auto" }} /></Box>
             <Box sx={{ textAlign: { xs: "center", sm: "center" }, width: "100%" }}>
-              <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>Automation Champion Batch-1 Assessment</h1>
+              <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>Automation Champion Assessment</h1>
             </Box>
           </Paper>
 
           <Grid container spacing={2} alignItems="center" justifyContent="space-between" mb={2}>
             <Grid item xs={12} md={6}>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1}}>
                 {FACTORIES.map((f) => (
                   <Button key={f} variant={factoryFilter === f ? "contained" : "outlined"} onClick={() => setFactoryFilter(f)}
                     sx={{
@@ -200,7 +200,7 @@ export default function AdminDashboard() {
                 <TextField variant="outlined" size="small" label="Search by name, factory or project" value={search} onChange={(e) => setSearch(e.target.value)}
                   sx={{ minWidth: 200, backgroundColor: "#fff", borderRadius: 1 }} />
                 <Button variant="contained" color="primary" onClick={() => navigate("/evaluation-criteria")}>EVALUATION CRITERIA</Button>
-                <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>RESET</Button>
+                {/* <Button variant="outlined" onClick={handleReset} style={{ backgroundColor: "#fff" }}>RESET</Button> */}
                 <Button variant="contained" onClick={handleExportCSV}>EXPORT CSV</Button>
               </Box>
             </Grid>
