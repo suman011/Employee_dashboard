@@ -105,7 +105,7 @@ export default function EmployeeProfile() {
           </Box>
 
           <Box sx={{ textAlign: { xs: "center" }, width: "100%" }}>
-            <h1 style={{ fontSize: "22px", fontWeight: "bold", margin: 0 }}>
+            <h1 style={{ fontSize: "2rem", fontWeight: "bold", margin: 0 }}>
               Automation Champion Assessment
             </h1>
           </Box>

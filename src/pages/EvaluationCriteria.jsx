@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Box, Typography, Button, Paper } from "@mui/material";
 import html2pdf from "html2pdf.js";
+import { useNavigate } from "react-router-dom";  // <-- You forgot this import
 
 const EVAL_DETAILS = [
   {
@@ -44,6 +45,7 @@ const EVAL_DETAILS = [
 
 export default function EvaluationCriteria() {
   const pdfRef = useRef();
+  const navigate = useNavigate();  // <-- This is the missing piece
 
   const handleDownload = () => {
     html2pdf().from(pdfRef.current).save("EvaluationCriteria.pdf");
@@ -51,7 +53,11 @@ export default function EvaluationCriteria() {
 
   return (
     <Box p={4}>
-      <Typography variant="h4" gutterBottom textAlign="center">
+      <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>
+        ← Back to Dashboard
+      </Button>
+
+      <Typography variant="h3" gutterBottom textAlign="center">
         Evaluation Criteria
       </Typography>
 

@@ -99,8 +99,9 @@ export default function EvaluationForm() {
              </h1>
            </Box>
          </Paper>
-         
-
+         <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>
+          ← Back to Dashboard
+        </Button>
         <Paper elevation={3} sx={{ p: 4, backgroundColor: "white" }}>
           <Typography variant="h5" fontWeight="bold" mb={3}>
             Evaluate: {participant}
