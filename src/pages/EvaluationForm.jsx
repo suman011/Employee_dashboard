@@ -28,17 +28,27 @@ export default function EvaluationForm() {
   });
 
   const [answers, setAnswers] = useState(initial);
+  const [submittedAnswers, setSubmittedAnswers] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const userRole = sessionStorage.getItem("userRole");
+  const isAdmin = userRole === "admin";
+  const formKey = `eval_${participant}`;
 
   useEffect(() => {
-    const saved = localStorage.getItem(`eval_${participant}`);
+    const saved = localStorage.getItem(formKey);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (parsed.answers) setAnswers(parsed.answers);
+      if (parsed.answers) {
+        setAnswers(parsed.answers);
+        setSubmittedAnswers(parsed.answers); // store original answers separately
+      }
+      if (parsed.submittedBy) setIsSubmitted(true);
     }
-  }, [participant]);
+  }, [formKey]);
 
   const handleChange = (sec, item, val, max) => {
-    const number = Number(val);
+    const cleaned = val.replace(/^0+(?=\d)/, ''); // remove leading zero
+    const number = Number(cleaned);
     if (number <= max && number >= 0) {
       setAnswers((prev) => ({
         ...prev,
@@ -49,9 +59,16 @@ export default function EvaluationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem(`eval_${participant}`, JSON.stringify({ answers }));
+    localStorage.setItem(formKey, JSON.stringify({ answers, submittedBy: userRole }));
+    setIsSubmitted(true);
+    setSubmittedAnswers(answers); // freeze submitted values
     alert("Submitted! 🎉");
     navigate("/admin-dashboard");
+  };
+
+  const isFieldDisabled = (sectionKey, itemKey) => {
+    const submittedValue = submittedAnswers?.[sectionKey]?.[itemKey];
+    return isAdmin && isSubmitted && submittedValue !== undefined && submittedValue !== "";
   };
 
   return (
@@ -66,46 +83,19 @@ export default function EvaluationForm() {
       }}
     >
       <Container maxWidth="md">
-         <Paper
-           elevation={3}
-           sx={{
-             p: 2,
-             mb: 2,
-             position: "relative",
-             display: "flex",
-             alignItems: "center",
-             height: "100px"
-           }}
-         >
-           {/* Logo - Left aligned */}
-           <Box sx={{ position: "absolute", left: 45 }}>
-             <img
-               src="/images/productivelogo.png"
-               alt="Logo"
-               style={{ width: "80px", height: "auto" }}
-             />
-           </Box>
-         
-           {/* Title - Centered */}
-           <Box
-             sx={{
-               flex: 1,
-               textAlign: "center",
-               width: "100%",
-             }}
-           >
-             <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
-               Automation Champion Assessment
-             </h1>
-           </Box>
-         </Paper>
-         <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>
-          ← Back to Dashboard
-        </Button>
+        <Paper elevation={3} sx={{ p: 2, mb: 2, position: "relative", display: "flex", alignItems: "center", height: "100px" }}>
+          <Box sx={{ position: "absolute", left: 45 }}>
+            <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px", height: "auto" }} />
+          </Box>
+          <Box sx={{ flex: 1, textAlign: "center", width: "100%" }}>
+            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>Automation Champion Assessment</h1>
+          </Box>
+        </Paper>
+
+        <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>← Back to Dashboard</Button>
+
         <Paper elevation={3} sx={{ p: 4, backgroundColor: "white" }}>
-          <Typography variant="h5" fontWeight="bold" mb={3}>
-            Evaluate: {participant}
-          </Typography>
+          <Typography variant="h5" fontWeight="bold" mb={3}>Evaluate: {participant}</Typography>
 
           <Box component="form" onSubmit={handleSubmit}>
             {Object.entries(EVAL_CONFIG).map(([secKey, section], idx) => (
@@ -113,10 +103,9 @@ export default function EvaluationForm() {
                 <Typography variant="h6" fontWeight="bold" color="primary">
                   {idx + 1}. {section.title}
                 </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: "bold", mb: 1 }}>
-                  Evaluated by: {section.evaluator}
-                </Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: "bold", mb: 1 }}>Evaluated by: {section.evaluator}</Typography>
                 <Divider sx={{ mb: 2 }} />
+
                 {section.items.map((it) => (
                   <Box key={it.key} sx={{ mb: 3 }}>
                     <TextField
@@ -126,23 +115,24 @@ export default function EvaluationForm() {
                       label={`${it.label} (0–${it.max})`}
                       inputProps={{ min: 0, max: it.max }}
                       value={answers[secKey]?.[it.key] ?? ""}
-                      onChange={(e) =>
-                        handleChange(secKey, it.key, e.target.value, it.max)
-                      }
+                      onChange={(e) => handleChange(secKey, it.key, e.target.value, it.max)}
+                      onBlur={(e) => {
+                        const cleaned = e.target.value.replace(/^0+(?=\d)/, '');
+                        setAnswers((prev) => ({
+                          ...prev,
+                          [secKey]: { ...prev[secKey], [it.key]: cleaned }
+                        }));
+                      }}
+                      disabled={isFieldDisabled(secKey, it.key) || userRole === "employee"}
                     />
                   </Box>
                 ))}
               </Box>
             ))}
 
-            <Button
-              type="submit"
-              variant="contained"
-              size="large"
-              sx={{ mt: 2 }}
-            >
-              Submit Evaluation
-            </Button>
+            {userRole !== "employee" && (
+              <Button type="submit" variant="contained" size="large" sx={{ mt: 2 }}>Submit Evaluation</Button>
+            )}
           </Box>
         </Paper>
       </Container>

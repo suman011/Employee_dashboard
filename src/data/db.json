@@ -2,13 +2,13 @@
   "users": [
     {
       "username": "nitin.tulaskar@siemens.com",
-      "password": "123456",
-      "role": "admin"
+      "password": "Sukoon123",
+      "role": "superadmin"
     }, 
     {
       "username": "patelmanish@siemens.com",
-      "password": "123456",
-      "role": "admin"
+      "password": "Patel@123",
+      "role": "superadmin"
     }, 
     {
       "username": "amol.bhalerao@siemens.com",

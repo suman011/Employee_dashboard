@@ -15,8 +15,15 @@ import {
   useTheme,
   useMediaQuery
 } from "@mui/material";
-import employees from "../data/employees.json";
+
+import defaultEmployees from "../data/employees.json";
 import { EVAL_CONFIG } from "../config/evalConfig";
+
+// ✅ Load from localStorage (if any added), fallback to employees.json
+const getParticipants = () => {
+  const saved = localStorage.getItem("participants");
+  return saved ? JSON.parse(saved) : defaultEmployees;
+};
 
 export default function EmployeeProfile() {
   const { id: routeId } = useParams();
@@ -27,7 +34,8 @@ export default function EmployeeProfile() {
 
   const id = routeId ?? sessionStorage.getItem("employeeIndex");
   const idx = parseInt(id, 10);
-  const e = employees[idx];
+  const participants = getParticipants();
+  const e = participants[idx];
 
   if (!e) {
     return (
