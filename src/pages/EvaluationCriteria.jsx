@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { Box, Typography, Button, Paper } from "@mui/material";
+// eslint-disable-next-line
 import html2pdf from "html2pdf.js";
-import { useNavigate } from "react-router-dom";  // <-- You forgot this import
+import { useNavigate } from "react-router-dom"; // <-- You forgot this import
 
 const EVAL_DETAILS = [
   {

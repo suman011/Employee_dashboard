@@ -4,9 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "server": "node server.js",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set GENERATE_SOURCEMAP=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -62,5 +61,8 @@
   "bugs": {
     "url": "https://github.com/suman011/Employee_dashboard/issues"
   },
-  "homepage": "https://github.com/suman011/Employee_dashboard#readme"
+
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }

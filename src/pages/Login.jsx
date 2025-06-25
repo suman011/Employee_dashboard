@@ -76,9 +76,9 @@ export default function Login() {
         px: 2,
       }}
     >
-      {/* <Box sx={{ position: "absolute", top: 24, left: 24 }}>
+      <Box sx={{ position: "absolute", top: 24, left: 24 }}>
         <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px" }} />
-      </Box> */}
+      </Box>
 
       <Paper
         elevation={10}

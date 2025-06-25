@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter  as Router, Routes, Route } from 'react-router-dom';
 import AdminDashboard from './pages/AdminDashboard';
 import EmployeeProfile from './pages/EmployeeProfile';
 import EvaluationForm from './pages/EvaluationForm';
