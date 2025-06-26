@@ -182,7 +182,7 @@ list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
 
   const columns = [
     { key: "sr", label: "Sr." },
-    { key: "isTop", label: "Top 5", sortable: true }, 
+    { key: "isTop", label: "League Toppers", sortable: true }, 
     { key: "name", label: "Participant Name" },
     { key: "factory", label: "Factory" },
     { key: "project", label: "Project" },
