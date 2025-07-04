@@ -19,6 +19,7 @@ export default function EvaluationForm() {
   const navigate = useNavigate();
   const participant = decodeURIComponent(useQueryParam("name"));
 
+  // Prepare initial empty answers object based on EVAL_CONFIG
   const initial = {};
   Object.entries(EVAL_CONFIG).forEach(([sec, cfg]) => {
     initial[sec] = {};
@@ -31,7 +32,6 @@ export default function EvaluationForm() {
   const [submittedAnswers, setSubmittedAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const userRole = sessionStorage.getItem("userRole");
-  const isAdmin = userRole === "admin";
   const formKey = `eval_${participant}`;
 
   useEffect(() => {
@@ -40,14 +40,21 @@ export default function EvaluationForm() {
       const parsed = JSON.parse(saved);
       if (parsed.answers) {
         setAnswers(parsed.answers);
-        setSubmittedAnswers(parsed.answers); // store original answers separately
+        setSubmittedAnswers(parsed.answers);
       }
       if (parsed.submittedBy) setIsSubmitted(true);
     }
   }, [formKey]);
 
   const handleChange = (sec, item, val, max) => {
-    const cleaned = val.replace(/^0+(?=\d)/, ''); // remove leading zero
+    if (val === "") {
+      setAnswers((prev) => ({
+        ...prev,
+        [sec]: { ...prev[sec], [item]: "" },
+      }));
+      return;
+    }
+    const cleaned = val.replace(/^0+(?=\d)/, "");
     const number = Number(cleaned);
     if (number <= max && number >= 0) {
       setAnswers((prev) => ({
@@ -59,17 +66,52 @@ export default function EvaluationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem(formKey, JSON.stringify({ answers, submittedBy: userRole }));
+    localStorage.setItem(
+      formKey,
+      JSON.stringify({ answers, submittedBy: userRole })
+    );
     setIsSubmitted(true);
-    setSubmittedAnswers(answers); // freeze submitted values
+    setSubmittedAnswers(answers);
     alert("Submitted! 🎉");
     navigate("/admin-dashboard");
   };
 
-  const isFieldDisabled = (sectionKey, itemKey) => {
-    const submittedValue = submittedAnswers?.[sectionKey]?.[itemKey];
-    return isAdmin && isSubmitted && submittedValue !== undefined && submittedValue !== "";
+  const handleReset = () => {
+    const cleared = {};
+    Object.entries(initial).forEach(([sec, items]) => {
+      cleared[sec] = {};
+      Object.keys(items).forEach((key) => {
+        cleared[sec][key] = "";
+      });
+    });
+    setAnswers(cleared);
+    setIsSubmitted(false);
+    setSubmittedAnswers({});
+    localStorage.removeItem(formKey);
+    alert("Form has been reset.");
   };
+
+  // Field disable logic:
+  // superadmin: always editable
+  // employee: always disabled
+  // admin: disabled if field already submitted (not empty)
+  const isFieldDisabled = (sectionKey, itemKey) => {
+    if (userRole === "superadmin") return false;
+    if (userRole === "employee") return true;
+
+    if (
+      userRole === "admin" &&
+      submittedAnswers?.[sectionKey]?.[itemKey] !== undefined &&
+      submittedAnswers?.[sectionKey]?.[itemKey] !== ""
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  // Submit button disabled for employees and for admins if already submitted
+  const isSubmitDisabled =
+    userRole === "employee" || (userRole === "admin" && isSubmitted);
 
   return (
     <Box
@@ -83,19 +125,43 @@ export default function EvaluationForm() {
       }}
     >
       <Container maxWidth="md">
-        <Paper elevation={3} sx={{ p: 2, mb: 2, position: "relative", display: "flex", alignItems: "center", height: "100px" }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 2,
+            mb: 2,
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            height: "100px",
+          }}
+        >
           <Box sx={{ position: "absolute", left: 45 }}>
-            <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px", height: "auto" }} />
+            <img
+              src="/images/productivelogo.png"
+              alt="Logo"
+              style={{ width: "80px", height: "auto" }}
+            />
           </Box>
           <Box sx={{ flex: 1, textAlign: "center", width: "100%" }}>
-            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>Automation Champion Assessment</h1>
+            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
+              Automation Champion Assessment
+            </h1>
           </Box>
         </Paper>
 
-        <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>← Back to Dashboard</Button>
+        <Button
+          variant="contained"
+          sx={{ mb: 3 }}
+          onClick={() => navigate("/admin-dashboard")}
+        >
+          ← Back to Dashboard
+        </Button>
 
         <Paper elevation={3} sx={{ p: 4, backgroundColor: "white" }}>
-          <Typography variant="h5" fontWeight="bold" mb={3}>Evaluate: {participant}</Typography>
+          <Typography variant="h5" fontWeight="bold" mb={3}>
+            Evaluate: {participant}
+          </Typography>
 
           <Box component="form" onSubmit={handleSubmit}>
             {Object.entries(EVAL_CONFIG).map(([secKey, section], idx) => (
@@ -103,7 +169,12 @@ export default function EvaluationForm() {
                 <Typography variant="h6" fontWeight="bold" color="primary">
                   {idx + 1}. {section.title}
                 </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: "bold", mb: 1 }}>Evaluated by: {section.evaluator}</Typography>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ fontWeight: "bold", mb: 1 }}
+                >
+                  Evaluated by: {section.evaluator}
+                </Typography>
                 <Divider sx={{ mb: 2 }} />
 
                 {section.items.map((it) => (
@@ -115,15 +186,17 @@ export default function EvaluationForm() {
                       label={`${it.label} (0–${it.max})`}
                       inputProps={{ min: 0, max: it.max }}
                       value={answers[secKey]?.[it.key] ?? ""}
-                      onChange={(e) => handleChange(secKey, it.key, e.target.value, it.max)}
+                      onChange={(e) =>
+                        handleChange(secKey, it.key, e.target.value, it.max)
+                      }
                       onBlur={(e) => {
-                        const cleaned = e.target.value.replace(/^0+(?=\d)/, '');
+                        const cleaned = e.target.value.replace(/^0+(?=\d)/, "");
                         setAnswers((prev) => ({
                           ...prev,
-                          [secKey]: { ...prev[secKey], [it.key]: cleaned }
+                          [secKey]: { ...prev[secKey], [it.key]: cleaned },
                         }));
                       }}
-                      disabled={isFieldDisabled(secKey, it.key) || userRole === "employee"}
+                      disabled={isFieldDisabled(secKey, it.key)}
                     />
                   </Box>
                 ))}
@@ -131,7 +204,28 @@ export default function EvaluationForm() {
             ))}
 
             {userRole !== "employee" && (
-              <Button type="submit" variant="contained" size="large" sx={{ mt: 2 }}>Submit Evaluation</Button>
+              <>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{ mt: 2, mr: 2 }}
+                  disabled={isSubmitDisabled}
+                >
+                  Submit Evaluation
+                </Button>
+
+                {userRole === "superadmin" && (
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{ mt: 2 }}
+                    onClick={handleReset}
+                  >
+                    Reset Form
+                  </Button>
+                )}
+              </>
             )}
           </Box>
         </Paper>
