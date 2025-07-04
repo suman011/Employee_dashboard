@@ -117,7 +117,7 @@ export default function EvaluationForm() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundImage: 'url("/images/background.png")',
+        backgroundImage: 'url("/images/loginbackground.png")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
