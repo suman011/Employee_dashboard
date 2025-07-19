@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // ✅ This fixes the blank screen issue in production
+  base: './', // ✅ This line is critical for preventing blank page on Vercel
 });
