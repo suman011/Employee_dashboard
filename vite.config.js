@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // <-- very important for Vercel static hosting
+  base: './', // ✅ required to fix blank screen
   build: {
-    outDir: 'dist',
-  },
+    outDir: 'dist'
+  }
 });
