@@ -13,6 +13,8 @@ import { EVAL_CONFIG } from "../config/evalConfig";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StarIcon from '@mui/icons-material/Star';
 import Tooltip from '@mui/material/Tooltip';
+import.meta.env.VITE_API_BASE_URL
+
 
 
 const FACTORIES = ["AIS", "GIS", "BIC"];
@@ -33,7 +35,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/employees`); // Replace with your actual backend API
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);        // Replace with your actual backend API
         const data = await res.json();
         setParticipants(data);
       } catch (error) {
@@ -58,7 +60,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/employees`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
         const data = await res.json();
         setParticipants(data);
       } catch (error) {
