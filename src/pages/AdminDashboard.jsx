@@ -8,7 +8,6 @@ import {
 import { ArrowDownward, ArrowUpward, Edit, Delete } from "@mui/icons-material";
 import { useEffect } from "react";
 
-  
 import { EVAL_CONFIG } from "../config/evalConfig";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StarIcon from '@mui/icons-material/Star';
@@ -493,7 +492,6 @@ list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
           <Button variant="contained" color="error" onClick={confirmDelete}>Delete</Button>
         </DialogActions>
       </Dialog>
-
       </Box>
     </Box>
   );
