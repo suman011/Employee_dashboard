@@ -13,8 +13,6 @@ import { EVAL_CONFIG } from "../config/evalConfig";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StarIcon from '@mui/icons-material/Star';
 import Tooltip from '@mui/material/Tooltip';
-import.meta.env.VITE_API_BASE_URL
-
 
 
 const FACTORIES = ["AIS", "GIS", "BIC"];
