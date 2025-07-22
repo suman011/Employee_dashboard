@@ -28,11 +28,12 @@ export default function AdminDashboard() {
 
   const userRole = sessionStorage.getItem("userRole");
   const isSuperAdmin = userRole === "superadmin";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);        // Replace with your actual backend API
+        const res = await fetch(`${API_BASE_URL}/employees`);        // Replace with your actual backend API
         const data = await res.json();
         setParticipants(data);
       } catch (error) {
@@ -57,7 +58,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
+        const res = await fetch(`${API_BASE_URL}/employees`);
         const data = await res.json();
         setParticipants(data);
       } catch (error) {
