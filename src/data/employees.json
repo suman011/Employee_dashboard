@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "emp001",
+    "name": "Mukesh Sonune",
+    "email": "mukesh.sonune@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic Screwing Solution for MA- Phase-2 (72.5-145kV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "mukesh.sonune@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp002",
+    "name": "Arunkumar Pandole",
+    "email": "arunkumar.pandole@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic Screwing Solution for MA- Phase-2 (72.5-145kV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "arunkumar.pandole@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp003",
+    "name": "Vikas Deshmukh",
+    "email": "vikas.deshmukh@siemens.com",
+    "factory": "AIS",
+    "project": "Auto Insulator Cleaning Set-up",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "vikas.deshmukh@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp004",
+    "name": "Krushna Devmali",
+    "email": "krushna.devmali@siemens.com",
+    "factory": "AIS",
+    "project": "Multiple level self adjusting trolley ",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "krushna.devmali@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp005",
+    "name": "Sunil Gaike",
+    "email": "sunil.gaike@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic pick and place for AIS CB Chamber Assembly- Phase-1 ((245 and Above))",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "sunil.gaike@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp006",
+    "name": "Nitin Jadhav",
+    "email": "nitin.jadhav@siemens.com",
+    "factory": "AIS",
+    "project": "Conveyor lines for SA and Main assemblies",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "nitin.jadhav@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp007",
+    "name": "Ganesh Gupta",
+    "email": "ganesh.gupta@siemens.com",
+    "factory": "AIS",
+    "project": "FCH Robo Integration",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "ganesh.gupta@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp008",
+    "name": "Devendra Dhotre",
+    "email": "devendra.dhotre@siemens.com",
+    "factory": "AIS",
+    "project": "MCH Machine ",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "devendra.dhotre@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp009",
+    "name": "Sudarshan More",
+    "email": "sudarshan.more@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic pick and place for AIS CB Chamber Assembly- Phase-1 ((245 and Above))",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "sudarshan.more@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp010",
+    "name": "Mahesh Sonwane",
+    "email": "mahesh.sonwane@siemens.com",
+    "factory": "BIC",
+    "project": "Rating Plate checking automation",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "mahesh.sonwane@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp011",
+    "name": "Liladhar Dhande",
+    "email": "liladhar.dhande@siemens.com",
+    "factory": "BIC",
+    "project": "GIS CT assembly Line",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "liladhar.dhande@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp012",
+    "name": "Nilesh Jadhav",
+    "email": "nilesh.nj.jadhav@siemens.com",
+    "factory": "BIC",
+    "project": "GIS CT Accuracy testing Automation - Auto change over of connections from Panel",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "nilesh.jadhav@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp013",
+    "name": "Gaurav Jadhav",
+    "email": "jadhav.gaurav@siemens.com",
+    "factory": "BIC",
+    "project": "Rating Plate checking automation",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "gaurav.jadhav@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp014",
+    "name": "Dilip Barde",
+    "email": "dilip.barde@siemens.com",
+    "factory": "BIC",
+    "project": "CT inhouse transportation automation",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "dilip.barde@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp015",
+    "name": "Bhima Nikule",
+    "email": "bhima.nikule@siemens.com",
+    "factory": "GIS",
+    "project": "400 kV GIS DS Line (Bus bar & Hv test) (q1 q2 q9)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "bhima.nikule@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp016",
+    "name": "Ajit Patil",
+    "email": "patil.ajit@siemens.com",
+    "factory": "GIS",
+    "project": "Manipulators for HV Test Preperation and Removal for 245 & 400 kV HV Preperation",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "ajit.patil@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp017",
+    "name": "Karan Raut",
+    "email": "karan.raut@siemens.com",
+    "factory": "GIS",
+    "project": "Automated CB Analyzer with Contactless Transducer (245/400 KV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "karan.raut@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp018",
+    "name": "Pratik Salunke",
+    "email": "pratik.salunke@siemens.com",
+    "factory": "GIS",
+    "project": "Lifter for Handling Challenging omponents (400kV TU finishing)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "pratik.salunke@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp019",
+    "name": "Shriram Dongare",
+    "email": "shriram.dongare@siemens.com",
+    "factory": "GIS",
+    "project": "Bolt Coating with  lubrications SPM",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "shriram.dongare@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp020",
+    "name": "Akshay Kotambe",
+    "email": "akshay.kotambe@siemens.com",
+    "factory": "GIS",
+    "project": "Bolt Coating with  lubrications SPM",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "akshay.kotambe@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp021",
+    "name": "Priti Jambe",
+    "email": "priti.jambe@siemens.com",
+    "factory": "GIS",
+    "project": "245 kV DS Assembly Line- Phase 2",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "priti.jambe@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp022",
+    "name": "Swornalata Behera",
+    "email": "swornalata.behera@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic pick and place for AIS CB Chamber Assembly- Phase-1 ((245 and Above))",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "swornalata.behera@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp023",
+    "name": "Harshada Misal",
+    "email": "harshada.misal@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic pick and place for AIS CB Chamber Assembly- Phase-2 (72.5 kV and 145 kV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "harshada.misal@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp024",
+    "name": "Priyanka C",
+    "email": "priyanka.chitte@siemens.com",
+    "factory": "AIS",
+    "project": "FCH Robo Integration",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "priyanka.c@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp025",
+    "name": "Amol Tupke",
+    "email": "amol.tupke@siemens.com",
+    "factory": "AIS",
+    "project": "Pole and Support Shifting 800 kV",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "amol.tupke@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp026",
+    "name": "Manoj Borde",
+    "email": "manoj.borde@siemens.com",
+    "factory": "AIS",
+    "project": "Auto Insulator Cleaning Set-up",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "manoj.borde@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp027",
+    "name": "Nilesh Jadhav",
+    "email": "jadhav.nilesh@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic Screwing Solution for MA- Phase-1 (245 and Above)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "nilesh.jadhav@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp028",
+    "name": "Darshan Girmal",
+    "email": "darshan.girmal@siemens.com",
+    "factory": "AIS",
+    "project": "Robotic Screwing Solution for MA- Phase-1 (245 and Above)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "darshan.girmal@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp029",
+    "name": "Zaheer Kureshi",
+    "email": "zahir.khureshi@siemens.com",
+    "factory": "AIS",
+    "project": "Power conveyor for Pole Assembly- 145 kV",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "zaheer.kureshi@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp030",
+    "name": "Vijaya Thombare",
+    "email": "vijaya.thombare@Siemens.com",
+    "factory": "AIS",
+    "project": "Robotic pick and place for AIS CB Chamber Assembly- Phase-2 (72.5 kV and 145 kV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "vijaya.thombare@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp031",
+    "name": "Mukeshkumar Prasad",
+    "email": "mukesh.prasad@siemens.com",
+    "factory": "AIS",
+    "project": "Pole and Support Shifting 800 kV",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "mukeshkumar.prasad@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp032",
+    "name": "Bhausaheb Sonne",
+    "email": "Bhausaheb.sonne@siemens.com",
+    "factory": "AIS",
+    "project": "Power conveyor for Pole Assembly- 145 kV",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "bhausaheb.sonne@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp033",
+    "name": "Akram Shaikh",
+    "email": "shaikh.akram@siemens.com",
+    "factory": "BIC",
+    "project": "GIS VT HV coil preparation _ Chamferring",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "akram.shaikh@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp034",
+    "name": "Sandeep Bansode",
+    "email": "sandeep.bansode@siemens.com",
+    "factory": "BIC",
+    "project": "GIS CT assembly Line",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "sandeep.bansode@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp035",
+    "name": "Dnayaneshwar Thorat",
+    "email": "dnayaneshwar.thorat@siemens.com",
+    "factory": "GIS",
+    "project": "Leakage Testing using  Robotic Method",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "dnayaneshwar.thorat@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp036",
+    "name": "Sagar Pote",
+    "email": "sagar.pote@siemens.com",
+    "factory": "GIS",
+    "project": "245 kV Earthing Switch Line (Merged with DS line) (ESHS)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "sagar.pote@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp037",
+    "name": "Milind Jadhav",
+    "email": "jadhav.milind@siemens.com",
+    "factory": "GIS",
+    "project": "Automated CB Analyzer with Contactless Transducer (245/400 KV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "milind.jadhav@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp038",
+    "name": "Paurnima Mundhe",
+    "email": "pornima.mundhe@siemens.com",
+    "factory": "GIS",
+    "project": "8DN9-2 Disconnector conductor setting using automobile principle of 4 wheels alignments ( multibolts)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "paurnima.mundhe@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp039",
+    "name": "Anjali Ghige",
+    "email": "anjali.ghige@siemens.com",
+    "factory": "GIS",
+    "project": "245 kV Earthing Switch Line (Merged with DS line) (ESHS)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "anjali.ghige@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp040",
+    "name": "Anuja Hatekar",
+    "email": "anuja.hatekar@siemens.com",
+    "factory": "GIS",
+    "project": "245 kV DS Assembly Line- Phase 2",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "anuja.hatekar@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp041",
+    "name": "Akshay Channe",
+    "email": "akshay.channe@siemens.com",
+    "factory": "GIS",
+    "project": "Lifter for Handling Challenging omponents (400kV TU finishing)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "akshay.channe@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp042",
+    "name": "Manoj Kale",
+    "email": "manoj.kale@siemens.com",
+    "factory": "GIS",
+    "project": "245 kV DS Assembly Line- Phase 2",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "manoj.kale@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp043",
+    "name": "Vaibhav Chavan",
+    "email": "vaibhav.chavan@siemens.com",
+    "factory": "GIS",
+    "project": "Automated DSES Analyzer with Contactless Transducer (245/400 KV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "vaibhav.chavan@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp044",
+    "name": "Girish Gurave",
+    "email": "girish.gurave@siemens.com",
+    "factory": "BIC",
+    "project": "CT inhouse transportation automation",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "girish.gurave@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp045",
+    "name": "Vaishnavi Sawne",
+    "email": "vaishnavi.sawne@siemens.com",
+    "factory": "BIC",
+    "project": "GIS VT HV coil preparation _ Chamferring",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "vaishnavi.sawne@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp046",
+    "name": "Vaibhav Kunde",
+    "email": "vaibhav.kunde@siemens.com",
+    "factory": "BIC",
+    "project": "Tool development for composite CVT assembly",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "vaibhav.kunde@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp047",
+    "name": "Mangesh Kadam",
+    "email": "mangesh.kadam@siemens.com",
+    "factory": "GIS",
+    "project": "400 kV GIS DS Line (Bus bar & Hv test) (q1 q2 q9)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "mangesh.kadam@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp048",
+    "name": "Shreyas Pachpor",
+    "email": "shreyas.pachpor@siemens.com",
+    "factory": "GIS",
+    "project": "145 kV Cross Module Assembly Line",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "shreyas.pachpor@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp049",
+    "name": "Gokul Pawar",
+    "email": "gokul.pawar@siemens.com",
+    "factory": "GIS",
+    "project": "Smart Endurance Kit (DSES, CB Analyzer - 145 KV)",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "gokul.pawar@siemens.com",
+    "password": "123456"
+  },
+  {
+    "id": "emp050",
+    "name": "Mousami Das",
+    "email": "mousumi.das@siemens.com",
+    "factory": "GIS",
+    "project": "Sub assembly trasport from subassembly station to main assembly station",
+    "scores": {
+      "upskilling": {
+        "attendance": 0,
+        "exam": 0
+      },
+      "projectExecution": {
+        "defineMeasure": 0,
+        "analyzeImprove": 0,
+        "control": 0
+      },
+      "newInitiative": {
+        "automationIdeas": 0,
+        "conceptDesign": 0
+      },
+      "teamwork": {
+        "communication": 0,
+        "accountability": 0
+      }
+    },
+    "evaluators": {
+      "upskilling": "IGTR",
+      "projectExecution": "Department Head",
+      "newInitiative": "BE Team",
+      "teamwork": "Team Lead and Mentor"
+    },
+    "username": "mousami.das@siemens.com",
+    "password": "123456"
+  }
+]
