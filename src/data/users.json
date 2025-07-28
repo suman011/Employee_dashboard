@@ -1,0 +1,12 @@
+[
+  {
+    "username": "nitin.tulaskar@siemens-energy-india.com",
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "username": "employee1@siemens.com",
+    "password": "123456",
+    "role": "employee"
+  }
+]
