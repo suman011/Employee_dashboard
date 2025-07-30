@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -13,46 +13,47 @@ import {
   Paper,
   TableContainer,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 
-import defaultEmployees from "../data/employees.json";
 import { EVAL_CONFIG } from "../config/evalConfig";
-
-// ✅ Load from localStorage (if any added), fallback to employees.json
-const getParticipants = () => {
-  const saved = localStorage.getItem("participants");
-  return saved ? JSON.parse(saved) : defaultEmployees;
-};
 
 export default function EmployeeProfile() {
   const { id: routeId } = useParams();
   const navigate = useNavigate();
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [participant, setParticipant] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [loading, setLoading] = useState(true);
+
   const id = routeId ?? sessionStorage.getItem("employeeIndex");
-  const idx = parseInt(id, 10);
-  const participants = getParticipants();
-  const e = participants[idx];
 
-  if (!e) {
-    return (
-      <Container maxWidth="md" sx={{ py: 4 }}>
-        <Typography color="error">Participant not found.</Typography>
-        <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={() => navigate(-1)}>
-          ← Back
-        </Button>
-      </Container>
-    );
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
+        const data = await res.json();
+        const index = parseInt(id, 10);
+        const selected = data[index];
+        setParticipant(selected);
 
-  const local = localStorage.getItem(`eval_${e.name}`);
-  if (local) {
-    const parsed = JSON.parse(local);
-    e.answers = parsed.answers;
-  }
+        const evalRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations?name=${encodeURIComponent(selected.name)}`);
+        const evalData = await evalRes.json();
+        setAnswers(evalData?.answers || {});
+      } catch (error) {
+        console.error("Failed to fetch profile data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (loading) return <Typography sx={{ p: 4 }}>Loading...</Typography>;
+  if (!participant) return <Typography sx={{ p: 4 }} color="error">Participant not found.</Typography>;
 
   let weightedSum = 0;
   let totalWeight = 0;
@@ -61,7 +62,7 @@ export default function EmployeeProfile() {
   Object.entries(EVAL_CONFIG).forEach(([sectionKey, { weight, items }]) => {
     const subScores = items
       .map((it) => {
-        const val = parseFloat(e.answers?.[sectionKey]?.[it.key]);
+        const val = parseFloat(answers?.[sectionKey]?.[it.key]);
         return isNaN(val) ? null : (val / it.max) * 10;
       })
       .filter((v) => v !== null);
@@ -77,11 +78,7 @@ export default function EmployeeProfile() {
     }
   });
 
-  const allSectionScores = Object.values(sectionScores).filter((score) => score > 0);
-  const overallRating =
-    allSectionScores.length > 0
-      ? parseFloat((allSectionScores.reduce((sum, v) => sum + v, 0) / allSectionScores.length).toFixed(1))
-      : 0.0;
+  const overallRating = totalWeight > 0 ? parseFloat((weightedSum / totalWeight).toFixed(1)) : 0.0;
 
   return (
     <Box
@@ -95,27 +92,12 @@ export default function EmployeeProfile() {
       }}
     >
       <Container maxWidth="lg">
-        {/* Responsive Header */}
-        <Paper
-          elevation={3}
-          sx={{
-            p: 2,
-            mb: 2,
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            alignItems: "center",
-            justifyContent: { xs: "center", sm: "flex-start" },
-            gap: 2
-          }}
-        >
+        <Paper elevation={3} sx={{ p: 2, mb: 2, display: "flex", flexDirection: "row", alignItems: "center", gap: 2 }}>
           <Box>
             <img src="/images/productivelogo.png" alt="Logo" style={{ width: "60px", height: "auto" }} />
           </Box>
-
-          <Box sx={{ textAlign: { xs: "center" }, width: "100%" }}>
-            <h1 style={{ fontSize: "2rem", fontWeight: "bold", margin: 0 }}>
-              Automation Champion Assessment
-            </h1>
+          <Box sx={{ textAlign: "center", flexGrow: 1 }}>
+            <h1 style={{ fontSize: "2rem", fontWeight: "bold", margin: 0 }}>Automation Champion Assessment</h1>
           </Box>
         </Paper>
 
@@ -124,35 +106,26 @@ export default function EmployeeProfile() {
         </Button>
 
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 800 }} stickyHeader>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Participant Name</TableCell>
-                <TableCell colSpan={7}>{e.name}</TableCell>
+                <TableCell colSpan={7}>{participant.name}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Factory</TableCell>
-                <TableCell colSpan={7}>{e.factory}</TableCell>
+                <TableCell colSpan={7}>{participant.factory}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Project</TableCell>
-                <TableCell colSpan={3}>{e.project}</TableCell>
+                <TableCell colSpan={3}>{participant.project}</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Rating</TableCell>
                 <TableCell colSpan={3} sx={{ backgroundColor: "yellow", fontWeight: "bold", textAlign: "center" }}>
                   {overallRating.toFixed(1)} / 10
                 </TableCell>
               </TableRow>
               <TableRow>
-                {[
-                  "Sr No",
-                  "Evaluation Criteria",
-                  "Weight",
-                  "Score",
-                  "Particulars",
-                  "Rating Range",
-                  "Sub-Score",
-                  "Evaluated By"
-                ].map((h) => (
+                {["Sr No", "Evaluation Criteria", "Weight", "Score", "Particulars", "Rating Range", "Sub-Score", "Evaluated By"].map((h) => (
                   <TableCell key={h} align="center" sx={{ fontWeight: "bold" }}>
                     {h}
                   </TableCell>
@@ -163,21 +136,15 @@ export default function EmployeeProfile() {
             <TableBody>
               {Object.entries(EVAL_CONFIG).map(([sectionKey, { title, weight, evaluator, items }], sIdx) =>
                 items.map((it, iIdx) => {
-                  const subScoreVal = e.answers?.[sectionKey]?.[it.key];
+                  const subScoreVal = answers?.[sectionKey]?.[it.key];
                   return (
                     <TableRow key={it.key}>
                       {iIdx === 0 && (
                         <>
-                          <TableCell rowSpan={items.length} align="center">
-                            {sIdx + 1}
-                          </TableCell>
+                          <TableCell rowSpan={items.length} align="center">{sIdx + 1}</TableCell>
                           <TableCell rowSpan={items.length}>{title}</TableCell>
-                          <TableCell rowSpan={items.length} align="center">
-                            {weight}%
-                          </TableCell>
-                          <TableCell rowSpan={items.length} align="center">
-                            {sectionScores[sectionKey]?.toFixed(1) || "0.0"}
-                          </TableCell>
+                          <TableCell rowSpan={items.length} align="center">{weight}%</TableCell>
+                          <TableCell rowSpan={items.length} align="center">{sectionScores[sectionKey]?.toFixed(1) || "0.0"}</TableCell>
                         </>
                       )}
                       <TableCell>{it.label}</TableCell>
@@ -186,9 +153,7 @@ export default function EmployeeProfile() {
                         {subScoreVal !== "" && subScoreVal !== undefined ? Number(subScoreVal).toFixed(2) : "–"}
                       </TableCell>
                       {iIdx === 0 && (
-                        <TableCell rowSpan={items.length} align="center">
-                          {evaluator}
-                        </TableCell>
+                        <TableCell rowSpan={items.length} align="center">{evaluator}</TableCell>
                       )}
                     </TableRow>
                   );

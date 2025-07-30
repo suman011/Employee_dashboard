@@ -18,33 +18,46 @@ function useQueryParam(key) {
 export default function EvaluationForm() {
   const navigate = useNavigate();
   const participant = decodeURIComponent(useQueryParam("name"));
-
-  // Prepare initial empty answers object based on EVAL_CONFIG
-  const initial = {};
-  Object.entries(EVAL_CONFIG).forEach(([sec, cfg]) => {
-    initial[sec] = {};
-    cfg.items.forEach((it) => {
-      initial[sec][it.key] = "";
-    });
-  });
-
-  const [answers, setAnswers] = useState(initial);
-  const [submittedAnswers, setSubmittedAnswers] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const userRole = sessionStorage.getItem("userRole");
-  const formKey = `eval_${participant}`;
 
+  const [answers, setAnswers] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedAnswers, setSubmittedAnswers] = useState({});
+
+  // Initialize answers object structure
+  const buildEmptyAnswers = () => {
+    const obj = {};
+    Object.entries(EVAL_CONFIG).forEach(([sec, cfg]) => {
+      obj[sec] = {};
+      cfg.items.forEach((it) => {
+        obj[sec][it.key] = "";
+      });
+    });
+    return obj;
+  };
+
+  // Fetch answers from backend
   useEffect(() => {
-    const saved = localStorage.getItem(formKey);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.answers) {
-        setAnswers(parsed.answers);
-        setSubmittedAnswers(parsed.answers);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations?name=${encodeURIComponent(participant)}`);
+        const data = await res.json();
+
+        if (data?.answers) {
+          setAnswers(data.answers);
+          setSubmittedAnswers(data.answers);
+          setIsSubmitted(!!data.submittedBy);
+        } else {
+          setAnswers(buildEmptyAnswers());
+        }
+      } catch (err) {
+        console.error("Error fetching evaluation:", err);
+        setAnswers(buildEmptyAnswers());
       }
-      if (parsed.submittedBy) setIsSubmitted(true);
-    }
-  }, [formKey]);
+    };
+
+    fetchData();
+  }, [participant]);
 
   const handleChange = (sec, item, val, max) => {
     if (val === "") {
@@ -54,8 +67,10 @@ export default function EvaluationForm() {
       }));
       return;
     }
+
     const cleaned = val.replace(/^0+(?=\d)/, "");
     const number = Number(cleaned);
+
     if (number <= max && number >= 0) {
       setAnswers((prev) => ({
         ...prev,
@@ -64,52 +79,55 @@ export default function EvaluationForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem(
-      formKey,
-      JSON.stringify({ answers, submittedBy: userRole })
-    );
-    setIsSubmitted(true);
-    setSubmittedAnswers(answers);
-    alert("Submitted! 🎉");
-    navigate("/admin-dashboard");
-  };
-
-  const handleReset = () => {
-    const cleared = {};
-    Object.entries(initial).forEach(([sec, items]) => {
-      cleared[sec] = {};
-      Object.keys(items).forEach((key) => {
-        cleared[sec][key] = "";
+    try {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: participant,
+          answers,
+          submittedBy: userRole,
+        }),
       });
-    });
-    setAnswers(cleared);
-    setIsSubmitted(false);
-    setSubmittedAnswers({});
-    localStorage.removeItem(formKey);
-    alert("Form has been reset.");
+
+      alert("Evaluation Submitted!");
+      setIsSubmitted(true);
+      setSubmittedAnswers(answers);
+      navigate("/admin-dashboard");
+    } catch (error) {
+      console.error("Submission failed", error);
+      alert("Submission failed. Please try again.");
+    }
   };
 
-  // Field disable logic:
-  // superadmin: always editable
-  // employee: always disabled
-  // admin: disabled if field already submitted (not empty)
+  const handleReset = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations/reset`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: participant }),
+      });
+
+      setAnswers(buildEmptyAnswers());
+      setIsSubmitted(false);
+      setSubmittedAnswers({});
+      alert("Form has been reset.");
+    } catch (error) {
+      console.error("Reset failed", error);
+    }
+  };
+
   const isFieldDisabled = (sectionKey, itemKey) => {
     if (userRole === "superadmin") return false;
     if (userRole === "employee") return true;
 
-    if (
-      userRole === "admin" &&
+    return userRole === "admin" &&
       submittedAnswers?.[sectionKey]?.[itemKey] !== undefined &&
-      submittedAnswers?.[sectionKey]?.[itemKey] !== ""
-    ) {
-      return true;
-    }
-    return false;
+      submittedAnswers?.[sectionKey]?.[itemKey] !== "";
   };
 
-  // Submit button disabled for employees and for admins if already submitted
   const isSubmitDisabled =
     userRole === "employee" || (userRole === "admin" && isSubmitted);
 
@@ -137,24 +155,14 @@ export default function EvaluationForm() {
           }}
         >
           <Box sx={{ position: "absolute", left: 45 }}>
-            <img
-              src="/images/productivelogo.png"
-              alt="Logo"
-              style={{ width: "80px", height: "auto" }}
-            />
+            <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px", height: "auto" }} />
           </Box>
           <Box sx={{ flex: 1, textAlign: "center", width: "100%" }}>
-            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>
-              Automation Champion Assessment
-            </h1>
+            <h1 style={{ fontSize: "26px", fontWeight: "bold", margin: 0 }}>Automation Champion Assessment</h1>
           </Box>
         </Paper>
 
-        <Button
-          variant="contained"
-          sx={{ mb: 3 }}
-          onClick={() => navigate("/admin-dashboard")}
-        >
+        <Button variant="contained" sx={{ mb: 3 }} onClick={() => navigate("/admin-dashboard")}>
           ← Back to Dashboard
         </Button>
 
@@ -169,10 +177,7 @@ export default function EvaluationForm() {
                 <Typography variant="h6" fontWeight="bold" color="primary">
                   {idx + 1}. {section.title}
                 </Typography>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ fontWeight: "bold", mb: 1 }}
-                >
+                <Typography variant="subtitle2" sx={{ fontWeight: "bold", mb: 1 }}>
                   Evaluated by: {section.evaluator}
                 </Typography>
                 <Divider sx={{ mb: 2 }} />

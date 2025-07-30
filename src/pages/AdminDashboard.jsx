@@ -33,16 +33,17 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);        // Replace with your actual backend API
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
         const data = await res.json();
         setParticipants(data);
       } catch (error) {
         console.error("Failed to fetch participants:", error);
       }
     };
-
+  
     fetchParticipants();
   }, []);
+  
 
   
 
@@ -86,22 +87,31 @@ export default function AdminDashboard() {
 
   const isFormValid = newParticipant.name.trim() !== "" && newParticipant.factory.trim() !== "" && newParticipant.project.trim() !== "";
 
-  const handleAddParticipant = () => {
+  const handleAddParticipant = async () => {
     if (!isFormValid) return;
-    setParticipants((prev) => {
-      const updated = [...prev];
-      if (editIndex !== null) {
-        updated[editIndex] = newParticipant;
-      } else {
-        updated.push(newParticipant);
-      }
-      localStorage.setItem("participants", JSON.stringify(updated));
-      return updated;
-    });
-    setNewParticipant({ name: "", factory: "", project: "" });
-    setEditIndex(null);
-    setOpenAddDialog(false);
+  
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`, {
+        method: editIndex !== null ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newParticipant),
+      });
+  
+      const data = await response.json();
+      setOpenAddDialog(false);
+      setNewParticipant({ name: "", factory: "", project: "" });
+      setEditIndex(null);
+      // Re-fetch data from backend
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
+      const allParticipants = await res.json();
+      setParticipants(allParticipants);
+    } catch (error) {
+      console.error("Error saving participant:", error);
+    }
   };
+  
 
   const handleEdit = (index) => {
     setNewParticipant(participants[index]);
@@ -114,16 +124,24 @@ export default function AdminDashboard() {
     setConfirmDialogOpen(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (deleteIndex !== null) {
-      const updated = [...participants];
-      updated.splice(deleteIndex, 1);
-      setParticipants(updated);
-      localStorage.setItem("participants", JSON.stringify(updated));
+      const participantToDelete = participants[deleteIndex];
+      try {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees/${participantToDelete.id}`, {
+          method: "DELETE",
+        });
+  
+        const updated = participants.filter((_, idx) => idx !== deleteIndex);
+        setParticipants(updated);
+      } catch (error) {
+        console.error("Error deleting participant:", error);
+      }
     }
     setConfirmDialogOpen(false);
     setDeleteIndex(null);
   };
+  
 
   const rows = useMemo(() => {
     const totalFields = Object.values(EVAL_CONFIG).reduce((sum, sec) => sum + sec.items.length, 0);
