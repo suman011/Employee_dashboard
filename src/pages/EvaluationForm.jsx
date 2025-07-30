@@ -10,7 +10,7 @@ import {
   Divider,
 } from "@mui/material";
 import { EVAL_CONFIG } from "../config/evalConfig";
-import employees from "../data/employees.json";
+
 
 function useQueryParam(key) {
   return new URLSearchParams(useLocation().search).get(key) || "";
@@ -37,15 +37,27 @@ export default function EvaluationForm() {
   };
 
   useEffect(() => {
-    const emp = employees.find((e) => e.name === participant);
-    if (emp && emp.answers) {
-      setAnswers(emp.answers);
-      setSubmittedAnswers(emp.answers);
-      setIsSubmitted(!!emp.submittedBy);
-    } else {
-      setAnswers(buildEmptyAnswers());
-    }
+    const fetchParticipant = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
+        const allEmployees = await res.json();
+        const emp = allEmployees.find((e) => e.name === participant);
+        if (emp && emp.answers) {
+          setAnswers(emp.answers);
+          setSubmittedAnswers(emp.answers);
+          setIsSubmitted(!!emp.submittedBy);
+        } else {
+          setAnswers(buildEmptyAnswers());
+        }
+      } catch (err) {
+        console.error("Failed to fetch participant", err);
+        setAnswers(buildEmptyAnswers());
+      }
+    };
+  
+    fetchParticipant();
   }, [participant]);
+  
 
   const handleChange = (sec, item, val, max) => {
     if (val === "") {

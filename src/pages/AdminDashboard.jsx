@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo,useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box, Button, Table, TableHead, TableRow, TableCell,
@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import { ArrowDownward, ArrowUpward, Edit, Delete } from "@mui/icons-material";
 import { EVAL_CONFIG } from "../config/evalConfig";
-import employeesData from "../data/employees.json";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StarIcon from '@mui/icons-material/Star';
 import Tooltip from '@mui/material/Tooltip';
@@ -26,7 +25,14 @@ export default function AdminDashboard() {
 
   const userRole = sessionStorage.getItem("userRole");
   const isSuperAdmin = userRole === "superadmin";
-  const [participants, setParticipants] = useState(employeesData);
+  const [participants, setParticipants] = useState([]);
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`)
+    .then((res) => res.json())
+    .then(setParticipants)
+    .catch((err) => console.error("Failed to load participants", err));
+}, []);
+
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -49,20 +55,33 @@ export default function AdminDashboard() {
 
   const isFormValid = newParticipant.name.trim() !== "" && newParticipant.factory.trim() !== "" && newParticipant.project.trim() !== "";
 
-  const handleAddParticipant = () => {
+  const handleAddParticipant = async () => {
     if (!isFormValid) return;
-    let updated = [...participants];
-    if (editIndex !== null) {
-      updated[editIndex] = newParticipant;
-    } else {
-      updated.push(newParticipant);
+    try {
+      const method = editIndex !== null ? "PUT" : "POST";
+      const endpoint = `${import.meta.env.VITE_API_BASE_URL}/employees${method === "PUT" ? `/${participants[editIndex].id}` : ""}`;
+      
+      const res = await fetch(endpoint, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newParticipant),
+      });
+  
+      if (!res.ok) throw new Error("Failed to save participant");
+  
+      // Refetch updated list from server
+      const updatedList = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`).then(r => r.json());
+      setParticipants(updatedList);
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong while saving the participant.");
     }
-    setParticipants(updated);
+  
     setOpenAddDialog(false);
     setNewParticipant({ name: "", factory: "", project: "" });
     setEditIndex(null);
   };
-
+  
   const handleEdit = (index) => {
     setNewParticipant(participants[index]);
     setEditIndex(index);
@@ -74,14 +93,23 @@ export default function AdminDashboard() {
     setConfirmDialogOpen(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (deleteIndex !== null) {
-      const updated = participants.filter((_, idx) => idx !== deleteIndex);
-      setParticipants(updated);
+      const participantToDelete = participants[deleteIndex];
+      try {
+        await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees/${participantToDelete.id}`, {
+          method: "DELETE",
+        });
+        const updatedList = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`).then(r => r.json());
+        setParticipants(updatedList);
+      } catch (err) {
+        console.error("Failed to delete", err);
+      }
     }
     setConfirmDialogOpen(false);
     setDeleteIndex(null);
   };
+  
 
   const rows = useMemo(() => {
     const totalFields = Object.values(EVAL_CONFIG).reduce((sum, sec) => sum + sec.items.length, 0);

@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 
 import { EVAL_CONFIG } from "../config/evalConfig";
-import employees from "../data/employees.json";
+
 
 export default function EmployeeProfile() {
   const { id: routeId } = useParams();
@@ -31,18 +31,26 @@ export default function EmployeeProfile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchParticipant = () => {
-      const index = parseInt(id, 10);
-      const selected = employees[index];
-      if (selected) {
-        setParticipant(selected);
-        setAnswers(selected.answers || {});
+    const fetchParticipant = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
+        const allEmployees = await res.json();
+        const index = parseInt(id, 10);
+        const selected = allEmployees[index];
+        if (selected) {
+          setParticipant(selected);
+          setAnswers(selected.answers || {});
+        }
+      } catch (err) {
+        console.error("Failed to fetch employee profile", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-
+  
     fetchParticipant();
   }, [id]);
+  
 
   if (loading) return <Typography sx={{ p: 4 }}>Loading...</Typography>;
   if (!participant) return <Typography sx={{ p: 4 }} color="error">Participant not found.</Typography>;
