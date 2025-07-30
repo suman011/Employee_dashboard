@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 
 import { EVAL_CONFIG } from "../config/evalConfig";
+import employees from "../data/employees.json";
 
 export default function EmployeeProfile() {
   const { id: routeId } = useParams();
@@ -24,32 +25,23 @@ export default function EmployeeProfile() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const id = routeId ?? sessionStorage.getItem("employeeIndex");
   const [participant, setParticipant] = useState(null);
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const id = routeId ?? sessionStorage.getItem("employeeIndex");
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
-        const data = await res.json();
-        const index = parseInt(id, 10);
-        const selected = data[index];
+    const fetchParticipant = () => {
+      const index = parseInt(id, 10);
+      const selected = employees[index];
+      if (selected) {
         setParticipant(selected);
-
-        const evalRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations?name=${encodeURIComponent(selected.name)}`);
-        const evalData = await evalRes.json();
-        setAnswers(evalData?.answers || {});
-      } catch (error) {
-        console.error("Failed to fetch profile data:", error);
-      } finally {
-        setLoading(false);
+        setAnswers(selected.answers || {});
       }
+      setLoading(false);
     };
 
-    fetchData();
+    fetchParticipant();
   }, [id]);
 
   if (loading) return <Typography sx={{ p: 4 }}>Loading...</Typography>;

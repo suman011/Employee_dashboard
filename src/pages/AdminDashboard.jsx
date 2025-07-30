@@ -6,14 +6,11 @@ import {
   useTheme, useMediaQuery, Select, InputLabel, FormControl, Dialog, DialogTitle, DialogContent, DialogActions
 } from "@mui/material";
 import { ArrowDownward, ArrowUpward, Edit, Delete } from "@mui/icons-material";
-import { useEffect } from "react";
-
-  
 import { EVAL_CONFIG } from "../config/evalConfig";
+import employeesData from "../data/employees.json";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import StarIcon from '@mui/icons-material/Star';
 import Tooltip from '@mui/material/Tooltip';
-
 
 const FACTORIES = ["AIS", "GIS", "BIC"];
 
@@ -29,23 +26,7 @@ export default function AdminDashboard() {
 
   const userRole = sessionStorage.getItem("userRole");
   const isSuperAdmin = userRole === "superadmin";
-
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
-        const data = await res.json();
-        setParticipants(data);
-      } catch (error) {
-        console.error("Failed to fetch participants:", error);
-      }
-    };
-  
-    fetchParticipants();
-  }, []);
-  
-
-  
+  const [participants, setParticipants] = useState(employeesData);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -54,28 +35,9 @@ export default function AdminDashboard() {
     handleClose();
   };
 
-  const [participants, setParticipants] = useState([]); // ✅ No fallback from localStorage
-
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
-        const data = await res.json();
-        setParticipants(data);
-      } catch (error) {
-        console.error("Failed to fetch participants:", error);
-      }
-    };
-  
-    fetchParticipants();
-  }, []);
-  
-
   const handleLogout = () => {
     sessionStorage.clear();
-    localStorage.removeItem("jwt-token");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("loggedInUser");
+    localStorage.clear();
     navigate("/");
   };
 
@@ -87,31 +49,19 @@ export default function AdminDashboard() {
 
   const isFormValid = newParticipant.name.trim() !== "" && newParticipant.factory.trim() !== "" && newParticipant.project.trim() !== "";
 
-  const handleAddParticipant = async () => {
+  const handleAddParticipant = () => {
     if (!isFormValid) return;
-  
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`, {
-        method: editIndex !== null ? "PUT" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newParticipant),
-      });
-  
-      const data = await response.json();
-      setOpenAddDialog(false);
-      setNewParticipant({ name: "", factory: "", project: "" });
-      setEditIndex(null);
-      // Re-fetch data from backend
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`);
-      const allParticipants = await res.json();
-      setParticipants(allParticipants);
-    } catch (error) {
-      console.error("Error saving participant:", error);
+    let updated = [...participants];
+    if (editIndex !== null) {
+      updated[editIndex] = newParticipant;
+    } else {
+      updated.push(newParticipant);
     }
+    setParticipants(updated);
+    setOpenAddDialog(false);
+    setNewParticipant({ name: "", factory: "", project: "" });
+    setEditIndex(null);
   };
-  
 
   const handleEdit = (index) => {
     setNewParticipant(participants[index]);
@@ -124,112 +74,66 @@ export default function AdminDashboard() {
     setConfirmDialogOpen(true);
   };
 
-  const confirmDelete = async () => {
+  const confirmDelete = () => {
     if (deleteIndex !== null) {
-      const participantToDelete = participants[deleteIndex];
-      try {
-        await fetch(`${import.meta.env.VITE_API_BASE_URL}/employees/${participantToDelete.id}`, {
-          method: "DELETE",
-        });
-  
-        const updated = participants.filter((_, idx) => idx !== deleteIndex);
-        setParticipants(updated);
-      } catch (error) {
-        console.error("Error deleting participant:", error);
-      }
+      const updated = participants.filter((_, idx) => idx !== deleteIndex);
+      setParticipants(updated);
     }
     setConfirmDialogOpen(false);
     setDeleteIndex(null);
   };
-  
 
   const rows = useMemo(() => {
     const totalFields = Object.values(EVAL_CONFIG).reduce((sum, sec) => sum + sec.items.length, 0);
-
     let list = participants.map((e, i) => {
-      const local = localStorage.getItem(`eval_${e.name}`);
-      let answers = {};
-      if (local) {
-        try {
-          const parsed = JSON.parse(local);
-          answers = parsed?.answers || {};
-        } catch {
-          answers = {};
-        }
-      }
-
-      let weightedSum = 0;
-      let totalWeight = 0;
-
+      const answers = e.answers || {};
+      let weightedSum = 0, totalWeight = 0;
       Object.entries(EVAL_CONFIG).forEach(([secKey, section]) => {
         const subScores = section.items.map((item) => {
           const val = parseFloat(answers?.[secKey]?.[item.key]);
           return isNaN(val) ? null : (val / item.max) * 10;
-        }).filter((v) => v !== null);
-        const sectionAvg = subScores.length > 0 ? subScores.reduce((sum, v) => sum + v, 0) / subScores.length : null;
+        }).filter(v => v !== null);
+        const sectionAvg = subScores.length > 0 ? subScores.reduce((s, v) => s + v, 0) / subScores.length : null;
         if (sectionAvg !== null) {
           weightedSum += sectionAvg;
           totalWeight += 1;
         }
       });
-
       const rating = totalWeight > 0 ? parseFloat((weightedSum / totalWeight).toFixed(1)) : 0;
-
       let filled = 0;
       Object.entries(EVAL_CONFIG).forEach(([sectionKey, section]) => {
         section.items.forEach((item) => {
           const val = answers?.[sectionKey]?.[item.key];
-          if (val !== null && val !== undefined && val !== "") {
-            filled += 1;
-          }
+          if (val !== null && val !== undefined && val !== "") filled += 1;
         });
       });
-
       const filling = totalFields > 0 ? Math.round((filled / totalFields) * 100) : 0;
-
       return { ...e, sr: i + 1, answers, rating, filling };
     });
-
-    const sortedByRating = [...list]
-  .filter((p) => p.rating > 0) // only participants with rating > 0
-  .sort((a, b) => b.rating - a.rating);
-
-const topFiveNames = new Set(sortedByRating.slice(0, 5).map(p => p.name));
-
-list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
-
-
-    list = list.filter((e) => {
-      const matchesFactory = factoryFilter === "All" || e.factory === factoryFilter;
-      const matchesSearch =
-        e.name.toLowerCase().includes(search.toLowerCase()) ||
+    const sortedByRating = [...list].filter(p => p.rating > 0).sort((a, b) => b.rating - a.rating);
+    const topFiveNames = new Set(sortedByRating.slice(0, 5).map(p => p.name));
+    list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
+    list = list.filter(e => {
+      const matchFactory = factoryFilter === "All" || e.factory === factoryFilter;
+      const matchSearch = e.name.toLowerCase().includes(search.toLowerCase()) ||
         e.factory.toLowerCase().includes(search.toLowerCase()) ||
         e.project.toLowerCase().includes(search.toLowerCase());
-      return matchesFactory && matchesSearch;
+      return matchFactory && matchSearch;
     });
-
     if (sortKey) {
       list.sort((a, b) => {
-        const valA = a[sortKey];
-        const valB = b[sortKey];
-    
-        if (typeof valA === "boolean" && typeof valB === "boolean") {
-          return desc ? (valB - valA) : (valA - valB);
-        }
-    
-        return desc
-          ? (valB || "").toString().localeCompare((valA || "").toString(), undefined, { numeric: true })
-          : (valA || "").toString().localeCompare((valB || "").toString(), undefined, { numeric: true });
+        const valA = a[sortKey], valB = b[sortKey];
+        if (typeof valA === "boolean" && typeof valB === "boolean") return desc ? valB - valA : valA - valB;
+        return desc ? (valB || "").toString().localeCompare((valA || "").toString(), undefined, { numeric: true })
+                    : (valA || "").toString().localeCompare((valB || "").toString(), undefined, { numeric: true });
       });
     }
-    
-
     return list;
   }, [participants, factoryFilter, search, sortKey, desc]);
 
   const columns = [
     { key: "sr", label: "Sr." },
-    { key: "isTop", label: "League Toppers", sortable: true }, 
+    { key: "isTop", label: "League Toppers", sortable: true },
     { key: "name", label: "Participant Name" },
     { key: "factory", label: "Factory" },
     { key: "project", label: "Project" },
@@ -242,18 +146,7 @@ list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
 
   const handleExportCSV = () => {
     const headers = ["Sr.", "Participant Name", "Factory", "Project", "Rating", "Filled %"];
-    const csvContent = [
-      headers.join(","),
-      ...rows.map((r) => [
-        r.sr,
-        `"${r.name}"`,
-        `"${r.factory}"`,
-        `"${r.project}"`,
-        r.rating.toFixed(1),
-        `${r.filling}%`
-      ].join(","))
-    ].join("\n");
-
+    const csvContent = [headers.join(","), ...rows.map(r => [r.sr, `"${r.name}"`, `"${r.factory}"`, `"${r.project}"`, r.rating.toFixed(1), `${r.filling}%`].join(","))].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -265,13 +158,10 @@ list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
   };
 
   const toggleSort = (key) => {
-    if (sortKey === key) {
-      setDesc(!desc);
-    } else {
-      setSortKey(key);
-      setDesc(true);
-    }
+    if (sortKey === key) setDesc(!desc);
+    else { setSortKey(key); setDesc(true); }
   };
+
   const renderChampionIcon = (isTop) => {
     return isTop ? (
       <Tooltip title="Top 5 Champion">
@@ -282,7 +172,7 @@ list = list.map(p => ({ ...p, isTop: topFiveNames.has(p.name) }));
       </Tooltip>
     ) : null;
   };
-  
+
   return (
     <Box sx={{ minHeight: "100vh", backgroundImage: 'url("/images/loginbackground.png")', backgroundSize: "cover", py: 4, px: 2 }}>
       <Box sx={{ maxWidth: "1400px", margin: "auto" }}>

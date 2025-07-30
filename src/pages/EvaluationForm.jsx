@@ -10,6 +10,7 @@ import {
   Divider,
 } from "@mui/material";
 import { EVAL_CONFIG } from "../config/evalConfig";
+import employees from "../data/employees.json";
 
 function useQueryParam(key) {
   return new URLSearchParams(useLocation().search).get(key) || "";
@@ -24,7 +25,6 @@ export default function EvaluationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedAnswers, setSubmittedAnswers] = useState({});
 
-  // Initialize answers object structure
   const buildEmptyAnswers = () => {
     const obj = {};
     Object.entries(EVAL_CONFIG).forEach(([sec, cfg]) => {
@@ -36,27 +36,15 @@ export default function EvaluationForm() {
     return obj;
   };
 
-  // Fetch answers from backend
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations?name=${encodeURIComponent(participant)}`);
-        const data = await res.json();
-
-        if (data?.answers) {
-          setAnswers(data.answers);
-          setSubmittedAnswers(data.answers);
-          setIsSubmitted(!!data.submittedBy);
-        } else {
-          setAnswers(buildEmptyAnswers());
-        }
-      } catch (err) {
-        console.error("Error fetching evaluation:", err);
-        setAnswers(buildEmptyAnswers());
-      }
-    };
-
-    fetchData();
+    const emp = employees.find((e) => e.name === participant);
+    if (emp && emp.answers) {
+      setAnswers(emp.answers);
+      setSubmittedAnswers(emp.answers);
+      setIsSubmitted(!!emp.submittedBy);
+    } else {
+      setAnswers(buildEmptyAnswers());
+    }
   }, [participant]);
 
   const handleChange = (sec, item, val, max) => {
@@ -79,50 +67,24 @@ export default function EvaluationForm() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: participant,
-          answers,
-          submittedBy: userRole,
-        }),
-      });
-
-      alert("Evaluation Submitted!");
-      setIsSubmitted(true);
-      setSubmittedAnswers(answers);
-      navigate("/admin-dashboard");
-    } catch (error) {
-      console.error("Submission failed", error);
-      alert("Submission failed. Please try again.");
-    }
+    alert("Evaluation Submitted!");
+    setIsSubmitted(true);
+    setSubmittedAnswers(answers);
+    navigate("/admin-dashboard");
   };
 
-  const handleReset = async () => {
-    try {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/evaluations/reset`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: participant }),
-      });
-
-      setAnswers(buildEmptyAnswers());
-      setIsSubmitted(false);
-      setSubmittedAnswers({});
-      alert("Form has been reset.");
-    } catch (error) {
-      console.error("Reset failed", error);
-    }
+  const handleReset = () => {
+    setAnswers(buildEmptyAnswers());
+    setIsSubmitted(false);
+    setSubmittedAnswers({});
+    alert("Form has been reset.");
   };
 
   const isFieldDisabled = (sectionKey, itemKey) => {
     if (userRole === "superadmin") return false;
     if (userRole === "employee") return true;
-
     return userRole === "admin" &&
       submittedAnswers?.[sectionKey]?.[itemKey] !== undefined &&
       submittedAnswers?.[sectionKey]?.[itemKey] !== "";
@@ -132,28 +94,9 @@ export default function EvaluationForm() {
     userRole === "employee" || (userRole === "admin" && isSubmitted);
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundImage: 'url("/images/loginbackground.png")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        py: 4,
-      }}
-    >
+    <Box sx={{ minHeight: "100vh", backgroundImage: 'url("/images/loginbackground.png")', backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", py: 4 }}>
       <Container maxWidth="md">
-        <Paper
-          elevation={3}
-          sx={{
-            p: 2,
-            mb: 2,
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            height: "100px",
-          }}
-        >
+        <Paper elevation={3} sx={{ p: 2, mb: 2, position: "relative", display: "flex", alignItems: "center", height: "100px" }}>
           <Box sx={{ position: "absolute", left: 45 }}>
             <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px", height: "auto" }} />
           </Box>
