@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -9,19 +9,33 @@ import {
   IconButton,
   Snackbar,
   Alert,
-  Link,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import users from "../data/db.js";
-import employees from "../data/employees.js";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [snackbar, setSnackbar] = useState({ open: false, message: "", type: "error" });
+
+  const [userData, setUserData] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
+
   const navigate = useNavigate();
+
+  // ✅ Fetch user and employee data from public/data
+  useEffect(() => {
+    Promise.all([
+      fetch("/data/db.json").then((res) => res.json()),
+      fetch("/data/employees.json").then((res) => res.json()),
+    ])
+      .then(([usersResp, employeesResp]) => {
+        setUserData(usersResp.users || []);
+        setEmployeeData(employeesResp || []);
+      })
+      .catch((err) => console.error("Failed to load login data", err));
+  }, []);
 
   const handleLogin = () => {
     if (!email || !password) {
@@ -29,8 +43,8 @@ export default function Login() {
       return;
     }
 
-    // 1. Check in admin users (from db.json)
-    const user = users.users.find((u) => u.username === email && u.password === password);
+    // ✅ 1. Check in admin/superadmin users
+    const user = userData.find((u) => u.username === email && u.password === password);
 
     if (user) {
       sessionStorage.setItem("userEmail", user.username);
@@ -43,11 +57,11 @@ export default function Login() {
       return;
     }
 
-    // 2. Check in employees
-    const employee = employees.find((e) => e.username === email && e.password === password);
+    // ✅ 2. Check in employees
+    const employee = employeeData.find((e) => e.username === email && e.password === password);
 
     if (employee) {
-      const empIndex = employees.findIndex((e) => e.username === email);
+      const empIndex = employeeData.findIndex((e) => e.username === email);
       sessionStorage.setItem("userEmail", employee.username);
       sessionStorage.setItem("userRole", "employee");
       sessionStorage.setItem("employeeIndex", empIndex);
@@ -59,7 +73,7 @@ export default function Login() {
       return;
     }
 
-    // If neither matched
+    // ❌ No match
     setSnackbar({ open: true, message: "Invalid credentials!", type: "error" });
   };
 
@@ -76,10 +90,6 @@ export default function Login() {
         px: 2,
       }}
     >
-      {/* <Box sx={{ position: "absolute", top: 24, left: 24 }}>
-        <img src="/images/productivelogo.png" alt="Logo" style={{ width: "80px" }} />
-      </Box> */}
-
       <Paper
         elevation={10}
         sx={{
@@ -121,12 +131,6 @@ export default function Login() {
             ),
           }}
         />
-
-        {/* <Box display="flex" justifyContent="flex-end" mt={1}>
-          <Link href="#" underline="hover" color="primary" fontSize={14}>
-            Forgot password?
-          </Link>
-        </Box> */}
 
         <Button
           variant="contained"
