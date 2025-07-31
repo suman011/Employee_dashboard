@@ -1,1 +1,4 @@
 employee-backend/
+# .vercelignore
+node_modules
+.vite
