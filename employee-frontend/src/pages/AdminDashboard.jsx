@@ -26,17 +26,12 @@ export default function AdminDashboard() {
   const userRole = sessionStorage.getItem("userRole");
   const isSuperAdmin = userRole === "superadmin";
   const [participants, setParticipants] = useState([]);
-  useEffect(() => {
-    console.log("API:", import.meta.env.VITE_API_BASE_URL);  // Debug line
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`)
-      .then(res => res.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setParticipants(data.employees || data);  // Depends on backend structure
-      })
-      .catch((err) => console.error("Failed to load participants", err));
-  }, []);
-  
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_BASE_URL}/employees`)
+    .then((res) => res.json())
+    .then(setParticipants)
+    .catch((err) => console.error("Failed to load participants", err));
+}, []);
 
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
